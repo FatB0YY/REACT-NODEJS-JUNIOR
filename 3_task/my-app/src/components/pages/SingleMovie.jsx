@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 
 import useMoviesService from '../../services/MoviesService'
 import Spinner from '../Spinner/Spinner'
@@ -17,8 +18,12 @@ const SingleMovie = (props) => {
   const { error, loading, getMov, clearError } = useMoviesService()
 
   // comments
-  const [value, setValue] = useState('')
-  const [comments, setComments] = useState({})
+  const [comment, setComment] = useState({
+    value: '',
+    date: '',
+    id: '',
+  })
+  const [comments, setComments] = useState([])
 
   useEffect(() => {
     updateData()
@@ -33,28 +38,31 @@ const SingleMovie = (props) => {
     setData(info)
   }
 
-  // добавление в стейт нового комментария
-  const addComment = (event) => {
+  const addNewComment = (event) => {
     event.preventDefault()
 
-    if (!value) {
+    if (!comment.value) {
       return
     }
 
-    const now =
-      new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
-    const obj = { ...comments, [now]: value }
+    const dateNow = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
 
-    setComments(obj)
+    setComments([...comments, {...comment, id: uuidv4(), date: dateNow}])
 
-    setValue('')
+    setComment({
+      value: '',
+      date: '',
+      id: '',
+    })
   }
 
-  const renderComments = useCallback(() => {
-    return Object.keys(comments).map((obj, idx) => {
-      return <Comment key={obj} obj={obj} comments={comments} />
-    })
-  }, [comments])
+  /* 
+    у меня все равно есть проблема:
+      каждый раз при изменении стейта comment.value, у нас
+      перерендеривается весь ебат компонент. Те log render 
+      вызывается каждый раз, когда мы изменяем comment.value
+
+  */
 
   const errorMessage = error ? <ErrorIMG /> : null
   const spinner = loading ? <Spinner /> : null
@@ -73,6 +81,7 @@ const SingleMovie = (props) => {
         <h2>{data.title}</h2>
         <span className='descBlock__year'>{data.year}</span>
         <div className='descBlock__genresBlock'>
+
           {data.genres
             ? data.genres.map((item, idx) => {
                 return (
@@ -85,6 +94,7 @@ const SingleMovie = (props) => {
                 )
               })
             : null}
+
         </div>
         <div className='descBlock__description'>
           <h3>Synopsis</h3>
@@ -93,13 +103,14 @@ const SingleMovie = (props) => {
         <div className='descBlock__comments'>
           <h3>Comments</h3>
 
-          {/* работает неверно useCallback*/}
-          {comments ? renderComments() : null}
+          {comments ? comments.map((item) => {
+            return <Comment key={item.id} value={item.value} date={item.date} />
+          }) : null}
 
-          <form className='addComment' onSubmit={(event) => addComment(event)}>
+          <form className='addComment' onSubmit={(event) => addNewComment(event)}>
             <textarea
-              value={value}
-              onChange={(event) => setValue(event.target.value)}
+              value={comment.value}
+              onChange={(event) => setComment({...comment, value: event.target.value})}
               type='text'
               placeholder='Leave a comment'
             />

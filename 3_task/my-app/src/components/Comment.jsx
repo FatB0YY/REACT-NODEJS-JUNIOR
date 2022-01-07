@@ -1,14 +1,14 @@
 import { useCallback } from "react"
 
-const Comment = ({obj, comments}) => {
+const Comment = ({value, date}) => {
   return (
     <div className='comment'>
       <div className='comment__header header-comment'>
         <span className='header-comment__user'>You</span>
-        <span className='header-comment__data'>{obj}</span>
+        <span className='header-comment__data'>{date}</span>
       </div>
       <div className='comment__body body-comment'>
-        <p>{comments[obj]}</p>
+        <p>{value}</p>
       </div>
     </div>
   )
