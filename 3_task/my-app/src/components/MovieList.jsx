@@ -4,6 +4,7 @@ import useMoviesService from '../services/MoviesService'
 import Spinner from './Spinner/Spinner'
 import ErrorIMG from './ErrorIMG/ErrorIMG'
 import rating from './rating.png'
+import Skeleton from './Skeleton/Skeleton'
 import './movieList.scss'
 
 const MovieList = (props) => {
@@ -106,6 +107,7 @@ const MovieList = (props) => {
         {errorMessage}
         {spinner}
         {items}
+        {/* <Skeleton /> */}
         <button
           onClick={() => onRequest(offset, false, page)}
           disabled={newItemsLoading}
