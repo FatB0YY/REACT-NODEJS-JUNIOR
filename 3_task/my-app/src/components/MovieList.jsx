@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import useMoviesService from '../services/MoviesService'
 import Spinner from './Spinner/Spinner'
 import ErrorIMG from './ErrorIMG/ErrorIMG'
 import rating from './rating.png'
-import Skeleton from './Skeleton/Skeleton'
+// import Skeleton from './Skeleton/Skeleton'
 import './movieList.scss'
 
 const MovieList = (props) => {

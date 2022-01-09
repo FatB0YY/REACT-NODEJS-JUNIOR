@@ -9,8 +9,6 @@ const Skeleton = () => {
           <div className='pulse skeleton__mini'></div>
         </div>
         <div className='pulse skeleton__block'></div>
-        <div className='pulse skeleton__block'></div>
-        <div className='pulse skeleton__block'></div>
       </div>
     </>
   )

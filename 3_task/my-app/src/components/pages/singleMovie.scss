@@ -140,55 +140,6 @@
         color: #ffffff;
         margin-bottom: 13px;
       }
-      .comment {
-        background: #606365;
-        border-radius: 5px;
-        padding: 7px 10px;
-        margin-bottom: 16px;
-
-        .body-comment {
-          margin-top: 8px;
-
-          p {
-            font-family: Roboto, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 20px;
-            line-height: 23px;
-            margin: 0;
-            padding: 0;
-            color: #ffffff;
-          }
-        }
-
-        .header-comment {
-          display: flex;
-          justify-content: space-between;
-          max-width: 200px;
-
-          &__user {
-            font-family: Roboto, sans-serif;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 15px;
-            line-height: 18px;
-            /* identical to box height */
-
-            color: #ffffff;
-          }
-
-          &__data {
-            font-family: Roboto, sans-serif;
-            font-style: normal;
-            font-weight: 200;
-            font-size: 15px;
-            line-height: 18px;
-            /* identical to box height */
-
-            color: #ffffff;
-          }
-        }
-      }
 
       .addComment {
         background: rgba(163, 163, 164, 0.1);
@@ -227,5 +178,43 @@
         }
       }
     }
+
+    &__sortBlock{
+      margin-bottom: 30px;
+
+      select{
+        background-color: inherit;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 20px;
+        color: #ffffff;  
+        option{
+          background-color:#606365;
+        }
+      }
+
+
+    }
   }
+}
+
+
+.comment-enter{
+  opacity: 0;
+}
+
+.comment-enter-active{
+  opacity: 1;
+  transition: opacity 380ms ease-in;
+}
+
+.comment-exit{
+  opacity: 1;
+}
+
+.comment-exit-active{
+  opacity: 0;
+  transition: opacity 380ms ease-in;
 }

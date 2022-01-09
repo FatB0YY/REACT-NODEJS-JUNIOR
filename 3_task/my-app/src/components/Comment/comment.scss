@@ -1,0 +1,67 @@
+.btn-delete {
+    color: rgb(232, 230, 227);
+    background-color: rgb(148, 35, 32);
+    border-color: rgb(143, 35, 31);
+
+    padding: 6px 12px;
+    border-radius: 4px;
+  img {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.btn-delete:hover {
+    color: rgb(232, 230, 227);
+    background-color: rgb(161, 38, 35);
+    border-color: rgb(158, 38, 34);
+}
+.comment {
+  background: #606365;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-bottom: 16px;
+
+  .body-comment {
+    margin-top: 8px;
+
+    p {
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 23px;
+      margin: 0;
+      padding: 0;
+      color: #ffffff;
+    }
+  }
+
+  .header-comment {
+    display: flex;
+    justify-content: space-between;
+
+    &__user {
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 18px;
+      /* identical to box height */
+
+      color: #ffffff;
+    }
+
+    &__data {
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: 200;
+      font-size: 15px;
+      line-height: 18px;
+      /* identical to box height */
+
+      color: #ffffff;
+      margin-left: 15px;
+    }
+  }
+}

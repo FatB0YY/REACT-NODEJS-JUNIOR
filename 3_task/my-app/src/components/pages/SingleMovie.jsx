@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 import useMoviesService from '../../services/MoviesService'
 import Spinner from '../Spinner/Spinner'
@@ -8,9 +8,13 @@ import ErrorIMG from '../ErrorIMG/ErrorIMG'
 import star from '../star-amsll.png'
 import submit from '../undo.png'
 
-import Comment from '../Comment'
+import Skeleton from '../Skeleton/Skeleton'
+
+import CommentsList from '../CommentsList/CommentsList'
+import GenresList from '../GenresList/GenresList'
 
 import './singleMovie.scss'
+
 
 const SingleMovie = (props) => {
   const { id } = useParams()
@@ -24,6 +28,9 @@ const SingleMovie = (props) => {
     id: '',
   })
   const [comments, setComments] = useState([])
+
+  // select
+  const [selectedSort, setSelectedSort] = useState('')
 
   useEffect(() => {
     updateData()
@@ -41,14 +48,13 @@ const SingleMovie = (props) => {
   const addNewComment = (event) => {
     event.preventDefault()
 
-    if (!comment.value) {
+    // мини валидация ;) можно подключить formik или react form hooks
+    if (!comment.value.trim()) {
       return
     }
-
-    const dateNow = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
-
-    setComments([...comments, {...comment, id: uuidv4(), date: dateNow}])
-
+    const dateNow =
+      new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
+    setComments([...comments, { ...comment, id: uuidv4(), date: dateNow }])
     setComment({
       value: '',
       date: '',
@@ -56,13 +62,21 @@ const SingleMovie = (props) => {
     })
   }
 
-  /* 
-    у меня все равно есть проблема:
-      каждый раз при изменении стейта comment.value, у нас
-      перерендеривается весь ебат компонент. Те log render 
-      вызывается каждый раз, когда мы изменяем comment.value
+  // функция обратного вызова для удаления комментария
+  const removeComment = useCallback((comment) => {
+    setComments(comments.filter((c) => c.id !== comment.id))
+  }, [comments])
 
-  */
+  // сортировка
+  const sortComments = (event) => {
+    setSelectedSort(event.target.value)
+
+    if (selectedSort === 'new') {
+      setComments([...comments].sort((a, b) => b.date.localeCompare(a.date)))
+    } else if (selectedSort === 'old') {
+      setComments([...comments].sort((a, b) => a.date.localeCompare(b.date)))
+    }
+  }
 
   const errorMessage = error ? <ErrorIMG /> : null
   const spinner = loading ? <Spinner /> : null
@@ -83,16 +97,7 @@ const SingleMovie = (props) => {
         <div className='descBlock__genresBlock'>
 
           {data.genres
-            ? data.genres.map((item, idx) => {
-                return (
-                  <div key={idx} className='descBlock__genresBlockItem'>
-                    <span className='genresBlockItem-circle'></span>
-                    <span key={item} className='descBlock__genres'>
-                      {item}
-                    </span>
-                  </div>
-                )
-              })
+            ? ( <GenresList data={data}/>)
             : null}
 
         </div>
@@ -103,14 +108,38 @@ const SingleMovie = (props) => {
         <div className='descBlock__comments'>
           <h3>Comments</h3>
 
-          {comments ? comments.map((item) => {
-            return <Comment key={item.id} value={item.value} date={item.date} />
-          }) : null}
+          <div className='descBlock__sortBlock'>
+            <select
+              value={selectedSort}
+              onChange={(event) => sortComments(event)}
+            >
+              <option disabled value=''>
+                Сортировка по дате
+              </option>
+              <option value='new' name='new'>
+                Сначала новые
+              </option>
+              <option value='old' name='old'>
+                Сначала старые
+              </option>
+            </select>
+          </div>
 
-          <form className='addComment' onSubmit={(event) => addNewComment(event)}>
+          {comments.length ? (
+            <CommentsList comments={comments} removeComment={removeComment} />
+          ) : (
+            <Skeleton />
+          )}
+
+          <form
+            className='addComment'
+            onSubmit={(event) => addNewComment(event)}
+          >
             <textarea
               value={comment.value}
-              onChange={(event) => setComment({...comment, value: event.target.value})}
+              onChange={(event) =>
+                setComment({ ...comment, value: event.target.value })
+              }
               type='text'
               placeholder='Leave a comment'
             />
