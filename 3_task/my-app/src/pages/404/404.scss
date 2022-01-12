@@ -1,0 +1,38 @@
+.not-found {
+    &__block {
+      max-width: 980px;
+      width: 90%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 35px;
+      padding-left: 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  
+      img {
+        max-width: 100%;
+      }
+  
+      h1 {
+        font-family: 'TT Norms';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 64px;
+        line-height: 76px;
+        color: #010624;
+      }
+  
+      p {
+        font-family: 'TT Norms';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 27px;
+        font-feature-settings: 'liga' off;
+        color: #5c5c6d;
+      }
+    }
+  }
+  

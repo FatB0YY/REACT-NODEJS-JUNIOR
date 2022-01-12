@@ -1,4 +1,5 @@
 import { useHttp } from '../hooks/http.hook'
+// import img from '../components/ErrorIMG/error.png'
 
 const useMarvelService = () => {
   const { loading, request, error, clearError } = useHttp()
@@ -8,14 +9,14 @@ const useMarvelService = () => {
   const _basePage = 1
 
   const getAllMovies = async (offset = _baseOffset, page = _basePage) => {
-    const res = await request(
-      `${_apiUrl}?page=${page}&limit=${offset}`
-    )
+    const res = await request(`${_apiUrl}?page=${page}&limit=${offset}`)
     return res.data.movies.map(_transformMovie)
   }
 
   const getMov = async (id) => {
-    const res = await request(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
+    const res = await request(
+      `https://yts.mx/api/v2/movie_details.json?movie_id=${id}`
+    )
     return _transformMovie(res.data.movie)
   }
 
@@ -42,6 +43,3 @@ const useMarvelService = () => {
 }
 
 export default useMarvelService
-
-
-

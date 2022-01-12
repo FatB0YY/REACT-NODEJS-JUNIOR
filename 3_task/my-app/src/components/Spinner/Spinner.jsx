@@ -7,6 +7,7 @@ const Spinner = () => {
     height: '250px',
     objectFit: 'contain',
     margin: '0 auto',
+    borderRadius: '5px',
   }
 
   return <img style={style} src={img} alt='error' />

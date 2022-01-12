@@ -4,7 +4,6 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Comment from '../Comment/Comment'
 
 const CommentsList = memo(({ comments, removeComment }) => {
-  console.log('2')
   return (
     <TransitionGroup>
       {comments.map((item) => (

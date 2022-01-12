@@ -1,0 +1,229 @@
+.mov-info {
+  display: flex;
+  width: 100%;
+  padding: 57px 0;
+
+  .posterBlock {
+    width: 50%;
+
+    &__block {
+      position: relative;
+      max-width: 466px;
+      width: 100%;
+      height: 698px;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+      }
+
+      .posterBlock__ratingBlock {
+        position: absolute;
+        top: 10px;
+        right: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        background: rgba(48, 53, 57, 0.85);
+        border-radius: 5px;
+        width: 77px;
+
+        img {
+          object-fit: cover;
+          width: 20px;
+          height: 20px;
+          margin-right: 8px;
+        }
+
+        span {
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: 200;
+          font-size: 25px;
+          line-height: 29px;
+
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .descBlock {
+    width: 50%;
+
+    h2 {
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 50px;
+      line-height: 59px;
+      /* identical to box height */
+
+      color: #ffffff;
+    }
+
+    &__year {
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: 200;
+      font-size: 35px;
+      line-height: 41px;
+      /* identical to box height */
+
+      color: #ffffff;
+    }
+
+    &__genresBlock {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      margin-bottom: 22px;
+      margin-top: 8px;
+
+      .descBlock__genresBlockItem {
+        display: flex;
+        align-items: center;
+        margin-right: 17px;
+
+        .genresBlockItem-circle {
+          background: #606365;
+          width: 13px;
+          height: 13px;
+          border-radius: 50%;
+          margin-right: 5px;
+        }
+
+        .descBlock__genres {
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: 300;
+          font-size: 20px;
+          line-height: 23px;
+          color: #ffffff;
+        }
+      }
+    }
+
+    &__description {
+      margin-bottom: 22px;
+      h3 {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 35px;
+        margin-bottom: 16px;
+        color: #ffffff;
+      }
+      p {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 23px;
+
+        color: #ffffff;
+      }
+    }
+
+    &__comments {
+      h3 {
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 35px;
+
+        color: #ffffff;
+        margin-bottom: 13px;
+      }
+
+      .addComment {
+        background: rgba(163, 163, 164, 0.1);
+        border-radius: 5px;
+        padding: 11px 12px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 23px;
+
+        button {
+          background: #303539;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 67px;
+          height: 39px;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          margin-left: 9px;
+        }
+        textarea {
+          width: 100%;
+          background: #606365;
+          border-radius: 5px;
+          font-family: Roboto, sans-serif;
+          font-style: normal;
+          font-weight: 300;
+          font-size: 20px;
+          line-height: 23px;
+          color: #ffffff;
+          padding: 9px 11px;
+          min-height: 70px;
+          height: auto;
+        }
+      }
+    }
+
+    &__sortBlock {
+      margin-bottom: 30px;
+
+      select {
+        background-color: inherit;
+        font-family: Roboto, sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 20px;
+        color: #ffffff;
+        option {
+          background-color: #606365;
+        }
+      }
+    }
+  }
+}
+
+.comment-enter {
+  opacity: 0;
+}
+
+.comment-enter-active {
+  opacity: 1;
+  transition: opacity 380ms ease-in;
+}
+
+.comment-exit {
+  opacity: 1;
+}
+
+.comment-exit-active {
+  opacity: 0;
+  transition: opacity 380ms ease-in;
+}
+
+
+@media (max-width: 1200px) {
+    .mov-info{
+      flex-direction: column;
+      align-items: center;
+
+      .posterBlock, .descBlock {
+        width: 100%;
+      }
+    }
+}

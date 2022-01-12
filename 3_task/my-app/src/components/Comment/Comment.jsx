@@ -1,4 +1,4 @@
-import deleteIcon from '../img/trash-alt-solid.svg'
+import deleteIcon from '../../img/trash-alt-solid.svg'
 
 import './comment.scss'
 

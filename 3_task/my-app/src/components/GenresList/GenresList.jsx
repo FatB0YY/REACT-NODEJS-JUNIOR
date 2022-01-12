@@ -1,7 +1,6 @@
 import { memo } from 'react'
 
 const GenresList = memo(({ data }) => {
-    console.log('1');
   return (
     <>
       {data.genres.map((item, idx) => {
